@@ -312,3 +312,24 @@ h1 { /* Toto pravidlo se aplikuje globálně, pokud není přepsáno */
     }
 }
 /* === End Scroll Down Indicator Styles === */
+
+/* === Hero Logo Styles === */
+.hero-logo {
+    display: block; /* Zajistí vlastní řádek a umožní margin auto */
+    max-width: 120px; /* Maximální šířka loga - uprav dle potřeby */
+    height: auto; /* Zachová poměr stran */
+    margin-left: auto; /* Centrování */
+    margin-right: auto; /* Centrování */
+    margin-bottom: 30px; /* Odsazení od H1 pod logem */
+    border-radius: 15px; /* Zakulacení rohů - uprav dle potřeby */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05); /* Volitelný jemný stín */
+}
+
+/* Responzivita pro logo - na menších mobilech může být menší */
+@media (max-width: 768px) {
+    .hero-logo {
+        max-width: 100px;
+        margin-bottom: 20px;
+    }
+}
+/* === End Hero Logo Styles === */
