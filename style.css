@@ -1,4 +1,66 @@
-﻿/* Základní reset a nastavení */
+﻿/* === Language Switcher Styles === */
+.language-switcher {
+    position: fixed; /* Fixní pozice */
+    top: 20px;
+    right: 20px;
+    z-index: 1000; /* Aby byl nad ostatním obsahem */
+    background-color: rgba(255, 255, 255, 0.8); /* Lehce průhledné bílé pozadí */
+    padding: 5px 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+    .language-switcher ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex; /* Vlajky vedle sebe */
+        gap: 10px; /* Mezera mezi vlajkami */
+    }
+
+    .language-switcher li {
+        margin-bottom: 0; /* Reset default margin */
+    }
+
+    .language-switcher img {
+        display: block;
+        width: 24px; /* Velikost vlajek */
+        height: 24px;
+        border-radius: 50%; /* Kulaté vlajky */
+        border: 1px solid #ddd;
+        transition: transform 0.2s ease;
+    }
+
+    .language-switcher a:hover img {
+        transform: scale(1.1); /* Lehké zvětšení při najetí */
+        border-color: #aaa;
+    }
+
+    /* Styl pro aktivní jazyk (volitelné) */
+    .language-switcher a.active img {
+        border: 2px solid #2c3e50; /* Modrý rámeček kolem aktivní */
+    }
+
+/* Responzivita pro přepínač */
+@media (max-width: 768px) {
+    .language-switcher {
+        top: 10px;
+        right: 10px;
+        padding: 4px 8px;
+    }
+
+        .language-switcher img {
+            width: 20px;
+            height: 20px;
+        }
+
+        .language-switcher ul {
+            gap: 8px;
+        }
+}
+/* === End Language Switcher Styles === */
+
+/* Základní reset a nastavení */
 * {
     margin: 0;
     padding: 0;
