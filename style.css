@@ -333,3 +333,56 @@ h1 { /* Toto pravidlo se aplikuje globálně, pokud není přepsáno */
     }
 }
 /* === End Hero Logo Styles === */
+
+/* === Internship Call to Action Styles === */
+.section-internship-cta {
+    background-color: #e0f2fe; /* Světle modrá - nebo jiná výrazná, ale ladící barva */
+    padding: 40px 20px; /* Menší padding než běžné sekce, aby to bylo kompaktnější */
+    border-top: 2px solid #0c4a6e; /* Tmavší modrý horní rámeček pro oddělení */
+    border-bottom: 2px solid #0c4a6e; /* Tmavší modrý spodní rámeček */
+    text-align: center; /* Vycentrování obsahu */
+}
+
+    .section-internship-cta h2 {
+        font-size: 1.8em; /* Mírně menší H2 */
+        color: #0c4a6e; /* Tmavě modrá barva nadpisu */
+        margin-bottom: 0.8em;
+    }
+
+    .section-internship-cta p {
+        color: #075985; /* Tmavší modrá pro text */
+        max-width: 700px; /* Omezení šířky pro lepší čitelnost */
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 1em;
+    }
+
+    .section-internship-cta .internship-cta-email {
+        font-weight: bold;
+        margin-top: 1.5em;
+    }
+
+        .section-internship-cta .internship-cta-email a {
+            color: #0369a1;
+            text-decoration: underline;
+        }
+
+            .section-internship-cta .internship-cta-email a:hover {
+                color: #0284c7;
+            }
+
+/* Responzivita pro CTA sekci */
+@media (max-width: 768px) {
+    .section-internship-cta h2 {
+        font-size: 1.5em;
+    }
+
+    .section-internship-cta p {
+        font-size: 0.95em;
+    }
+
+    .section-internship-cta {
+        padding: 30px 15px;
+    }
+}
+/* === End Internship Call to Action Styles === */
