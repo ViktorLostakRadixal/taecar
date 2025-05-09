@@ -386,3 +386,127 @@ h1 { /* Toto pravidlo se aplikuje globálně, pokud není přepsáno */
     }
 }
 /* === End Internship Call to Action Styles === */
+
+/* === Styly pro sekci Principy a hodnoty === */
+.section-principles {
+    background-color: #ffffff; /* Bílé pozadí, nebo dle vašeho výběru */
+    padding: 60px 20px; /* Standardní padding jako u ostatních sekcí */
+    border-top: 1px solid #e0e0e0; /* Linka pro oddělení */
+}
+
+    .section-principles h2 { /* Hlavní nadpis sekce "Naše principy a hodnoty" */
+        text-align: center; /* Vycentrování hlavního nadpisu sekce */
+        margin-bottom: 1.5em; /* Větší odsazení pod hlavním nadpisem */
+    }
+
+    .section-principles > .content-wrapper > p { /* Úvodní odstavec v sekci */
+        text-align: center;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 2em;
+        color: #555;
+    }
+
+.details-charta {
+    background-color: #f8f8f8; /* Lehce odlišené pozadí pro rozklikávací obsah, ladí s ostatními šedými sekcemi */
+    border-radius: 8px;
+    margin-top: 20px;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07); /* Jemný stín */
+}
+
+    .details-charta summary {
+        padding: 18px 25px; /* Trochu více paddingu */
+        font-weight: 700;
+        font-size: 1.4em; /* Větší písmo pro nadpis rozkliku */
+        color: #1a1a1a; /* Tmavší barva z vašeho style.css */
+        cursor: pointer;
+        outline: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: background-color 0.2s ease;
+        border-radius: 8px; /* Zakulacení i pro summary, pokud není rozkliknuto */
+    }
+
+    .details-charta[open] summary {
+        border-bottom-left-radius: 0; /* Odstranění zakulacení při otevření */
+        border-bottom-right-radius: 0;
+        border-bottom: 1px solid #e0e0e0; /* Linka pod summary při otevření */
+    }
+
+    .details-charta summary:hover {
+        background-color: #e9e9e9;
+    }
+
+    .details-charta summary .icon-toggle::before {
+        content: '▼'; /* Šipka dolů */
+        font-size: 0.75em; /* Trochu menší ikona */
+        margin-left: 15px;
+        display: inline-block;
+        transition: transform 0.3s ease-in-out;
+        color: #2c3e50; /* Barva ikony */
+    }
+
+    .details-charta[open] summary .icon-toggle::before {
+        transform: rotate(180deg); /* Otočení šipky nahoru */
+    }
+
+.charta-content {
+    padding: 25px 30px 30px 30px; /* Větší padding pro obsah */
+    line-height: 1.75; /* Mírně větší řádkování pro lepší čitelnost */
+    color: #444;
+}
+
+    /* Nadpisy článků a bodů v chartě - přebíráme z globálních, ale můžeme doladit */
+    .charta-content h2 { /* Preambule, Článek I, Závěrem... */
+        font-size: 1.8em; /* Mírně větší než H2 v běžných sekcích */
+        color: #1a1a1a;
+        margin-top: 1.8em;
+        margin-bottom: 1em;
+        padding-top: 0; /* Reset padding-top, pokud je globálně nastaven pro H2 */
+        text-align: left; /* Zarovnání doleva pro nadpisy článků */
+    }
+
+        .charta-content h2:first-of-type {
+            margin-top: 0.5em; /* Menší horní margin pro první nadpis (Preambule) */
+        }
+
+
+    .charta-content h3 { /* Nadpisy jednotlivých bodů (např. 1. Kurátorská svoboda...) */
+        font-size: 1.25em; /* Mírně větší */
+        color: #2c3e50; /* Tmavě modrá pro odlišení */
+        margin-top: 1.5em;
+        margin-bottom: 0.6em;
+        font-weight: 700;
+    }
+
+    .charta-content p,
+    .charta-content ol { /* Používáme <ol> pro články */
+        margin-bottom: 1.2em;
+    }
+
+    .charta-content ol {
+        list-style-type: none; /* Odstranění defaultních čísel, pokud chceme vlastní formátování přes H3 */
+        padding-left: 0; /* Reset paddingu */
+    }
+
+    .charta-content li {
+        margin-bottom: 1em; /* Větší mezera mezi body článku */
+    }
+
+    .charta-content strong { /* Pro zvýraznění jako polykrystalická subverzivita */
+        font-weight: 700;
+        color: #000000; /* Černá pro silné zvýraznění */
+    }
+
+/* Skrytí defaultní šipky (markeru) */
+.details-charta summary::-webkit-details-marker {
+    display: none;
+}
+
+.details-charta summary {
+    list-style-type: none;
+}
+/* === Konec stylů pro sekci Principy a hodnoty === */
