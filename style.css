@@ -228,14 +228,16 @@ h1 { /* Toto pravidlo se aplikuje globálně, pokud není přepsáno */
 /* Střídání pozadí pro lepší orientaci */
 .section-context,
 .section-collection,
-.section-partners {
+.section-partners,
+.section-principles {
     background-color: #ffffff; /* Bílá */
 }
 
 .section-intro,
 .section-concept,
 .section-operations,
-.section-contact {
+.section-contact,
+.section-for-artists {
     background-color: #f8f8f8; /* Světle šedá */
 }
 
@@ -506,6 +508,191 @@ h1 { /* Toto pravidlo se aplikuje globálně, pokud není přepsáno */
         }
 }
 /* === End New Volunteer Opportunities Section Styles === */
+
+/* === Section for Artists Styles === */
+.section-for-artists {
+    background-color: #fdfaef; /* Warm, inviting light beige/yellowish */
+    padding: 50px 20px;
+    border-top: 1px solid #f3eac2;
+    border-bottom: 1px solid #f3eac2;
+}
+
+    .section-for-artists .content-wrapper {
+        max-width: 850px;
+    }
+
+    .section-for-artists h2.centered-text {
+        font-size: 2.1em;
+        color: #725d0f; /* Warm dark brown/ochre */
+        margin-bottom: 0.8em;
+        text-align: center;
+    }
+
+    .section-for-artists p.centered-text.intro-paragraph {
+        color: #8a7329; /* Softer brown/ochre */
+        max-width: 750px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 2.5em;
+        line-height: 1.75;
+        text-align: center;
+        font-size: 1.05em;
+    }
+
+.artist-option { /* Styles for each <details> block in artist section */
+    background-color: #ffffff;
+    border: 1px solid #f3eac2; /* Border matching the section's theme */
+    border-radius: 8px;
+    margin-bottom: 25px;
+    box-shadow: 0 3px 10px rgba(114, 93, 15, 0.08); /* Softer shadow with a hint of theme color */
+    transition: box-shadow 0.3s ease;
+}
+
+    .artist-option:hover {
+        box-shadow: 0 5px 15px rgba(114, 93, 15, 0.12);
+    }
+
+    .artist-option summary {
+        padding: 20px 25px;
+        font-weight: 700;
+        font-size: 1.35em;
+        color: #725d0f; /* Theme color for summary text */
+        cursor: pointer;
+        outline: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: background-color 0.2s ease;
+        border-radius: 8px;
+    }
+
+    .artist-option[open] summary {
+        background-color: #fffcf2; /* Very light cream for open summary */
+        border-bottom: 1px solid #f3eac2;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    .artist-option summary:hover {
+        background-color: #fff9e6;
+    }
+
+    /* Styly pro samotnou ikonu šipky v sekci Pro umělce */
+    .artist-option summary .icon-toggle::before {
+        content: '▼'; /* Znak šipky */
+        font-size: 0.8em; /* Velikost ikony */
+        margin-left: 15px; /* Odsazení od textu v summary */
+        display: inline-block;
+        transition: transform 0.3s ease-in-out; /* Animace pro otočení */
+        color: #b08d2c; /* Specifická barva pro šipku v sekci Pro umělce */
+    }
+
+    /* Styly pro ikonu šipky, když je <details> prvek otevřený */
+    .artist-option[open] summary .icon-toggle::before {
+        transform: rotate(180deg); /* Otočení šipky */
+    }
+
+
+/* Content inside artist <details > */
+.artist-info-content {
+    padding: 25px 30px 30px 30px; /* Zvětšený padding pro lepší čitelnost */
+    line-height: 1.75; /* Větší řádkování */
+    color: #444; /* Barva textu, stejná jako v .charta-content */
+}
+
+/* Sub-headings inside <details> for artist section */
+.artist-info-content h3 {
+    font-size: 1.25em;
+    color: #8a6d00; /* Barva ladící s .artist-option summary (teplá hnědo-zlatá) */
+    margin-top: 0.8em; /* Upravený horní margin */
+    margin-bottom: 0.8em;
+    padding-top: 0; /* Reset případného zděděného paddingu */
+    font-weight: 700;
+}
+
+.artist-info-content h4 {
+    font-size: 1.1em;
+    color: #725d0f; /* Barva ladící s .artist-option summary (teplá tmavší hnědo-žlutá) */
+    margin-top: 1.5em; /* Větší odsazení pro h4 */
+    margin-bottom: 0.6em;
+    font-weight: 700;
+}
+
+.artist-info-content ul {
+    list-style-type: disc; /* Standardní odrážky */
+    list-style-position: outside; /* Odrážky vně textu pro lepší zarovnání */
+    padding-left: 20px; /* Odsazení pro odrážky */
+    margin-bottom: 1.2em;
+}
+
+.artist-info-content li {
+    margin-bottom: 0.7em; /* Mírně větší mezera mezi položkami seznamu */
+    color: #444; /* Barva textu položek seznamu */
+}
+
+.artist-info-content p {
+    margin-bottom: 1.2em;
+    color: #444; /* Barva textu odstavců */
+}
+
+.artist-info-content strong {
+    font-weight: 700;
+    color: #111; /* Barva pro zvýrazněný text */
+}
+
+.artist-info-content .document-download {
+    font-weight: normal;
+    margin-top: 1.8em;
+    font-size: 1.05em;
+    background-color: #fff9e6; /* Velmi světlá krémová/žlutá pro CTA ke stažení */
+    padding: 15px;
+    border-radius: 6px;
+    text-align: center;
+    border: 1px solid #f3eac2; /* Jemný rámeček ladící s pozadím sekce */
+}
+
+    .artist-info-content .document-download a.btn-download {
+        color: #8a6d00; /* Tmavší zlato-hnědá pro text odkazu */
+        font-weight: bold;
+        text-decoration: none;
+        padding: 10px 18px; /* Větší padding pro tlačítko */
+        border: 1px solid #c5a63b;
+        border-radius: 5px;
+        background-color: #ffeeb5; /* Světlejší žluto-zlatá pro pozadí tlačítka */
+        display: inline-block;
+        transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+        .artist-info-content .document-download a.btn-download:hover {
+            background-color: #ffd966; /* Světlejší žlutá při najetí */
+            color: #725d0f;
+            text-decoration: none;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+
+
+/* === Konec stylů specifických pro .artist-info-content === */
+
+
+/* Responsive adjustments for artist section */
+@media (max-width: 768px) {
+    .section-for-artists h2.centered-text {
+        font-size: 1.8em;
+    }
+
+    .section-for-artists p.centered-text.intro-paragraph {
+        font-size: 1em;
+        margin-bottom: 2em;
+    }
+
+    .artist-option summary {
+        font-size: 1.2em;
+        padding: 15px 20px;
+    }
+}
+/* === End Section for Artists Styles === */
 
 
 /* === Internship Call to Action Styles === */
