@@ -334,6 +334,180 @@ h1 { /* Toto pravidlo se aplikuje globálně, pokud není přepsáno */
 }
 /* === End Hero Logo Styles === */
 
+/* === New Volunteer Opportunities Section Styles === */
+.section-volunteer-opportunities {
+    background-color: #f0f7fa; /* Velmi světle modrá pro přívětivý vzhled, může být i jiná */
+    padding: 50px 20px;
+    border-top: 1px solid #d1e0e8;
+    border-bottom: 1px solid #d1e0e8;
+}
+
+    .section-volunteer-opportunities .content-wrapper {
+        max-width: 850px; /* Mírně širší pro tuto sekci */
+    }
+
+    .section-volunteer-opportunities h2.centered-text {
+        font-size: 2.1em;
+        color: #2c3e50; /* Tmavě modrá z vaší palety */
+        margin-bottom: 0.8em;
+        text-align: center;
+    }
+
+    .section-volunteer-opportunities p.centered-text.intro-paragraph {
+        color: #34495e; /* Mírně světlejší modrošedá */
+        max-width: 750px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 2.5em; /* Větší odsazení před rozklikávacími bloky */
+        line-height: 1.75;
+        text-align: center;
+        font-size: 1.05em;
+    }
+
+.volunteer-option {
+    background-color: #ffffff; /* Bílé pozadí pro každý rozklik */
+    border: 1px solid #dde4e8; /* Jemný rámeček */
+    border-radius: 8px;
+    margin-bottom: 25px; /* Mezera mezi rozklikávacími bloky */
+    box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+    transition: box-shadow 0.3s ease;
+}
+
+    .volunteer-option:hover {
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .volunteer-option summary {
+        padding: 20px 25px;
+        font-weight: 700;
+        font-size: 1.35em; /* Větší písmo pro nadpis rozkliku */
+        color: #2c3e50; /* Tmavě modrá */
+        cursor: pointer;
+        outline: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: background-color 0.2s ease;
+        border-radius: 8px; /* Zakulacení i pro summary */
+    }
+
+    .volunteer-option[open] summary {
+        background-color: #f8f9fa; /* Velmi světle šedá při otevření */
+        border-bottom: 1px solid #dde4e8;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    .volunteer-option summary:hover {
+        background-color: #f1f5f9;
+    }
+
+    .volunteer-option summary .icon-toggle::before {
+        content: '▼'; /* Šipka dolů */
+        font-size: 0.8em;
+        margin-left: 15px;
+        display: inline-block;
+        transition: transform 0.3s ease-in-out;
+        color: #3498db; /* Světlejší modrá pro ikonu */
+    }
+
+    .volunteer-option[open] summary .icon-toggle::before {
+        transform: rotate(180deg); /* Otočení šipky nahoru */
+    }
+
+.volunteer-content {
+    padding: 20px 30px 25px 30px; /* Odsazení obsahu uvnitř rozkliku */
+    line-height: 1.7;
+    color: #333;
+}
+
+    .volunteer-content h3 {
+        font-size: 1.25em;
+        color: #2980b9; /* Středně modrá pro podnadpisy uvnitř */
+        margin-top: 0.5em; /* Menší horní margin pro první nadpis uvnitř */
+        margin-bottom: 0.8em;
+    }
+
+    .volunteer-content h4 {
+        font-size: 1.1em;
+        color: #34495e;
+        margin-top: 1.2em;
+        margin-bottom: 0.5em;
+        font-weight: 700;
+    }
+
+    .volunteer-content ul {
+        list-style-type: disc;
+        padding-left: 20px; /* Odsazení pro odrážky */
+        margin-bottom: 1.2em;
+    }
+
+    .volunteer-content li {
+        margin-bottom: 0.6em;
+        color: #444;
+    }
+
+    .volunteer-content .volunteer-cta-email {
+        font-weight: normal;
+        margin-top: 1.8em;
+        font-size: 1.05em;
+        background-color: #eaf6ff; /* Velmi světle modré pozadí pro CTA email */
+        padding: 15px;
+        border-radius: 6px;
+        text-align: center;
+    }
+
+        .volunteer-content .volunteer-cta-email a {
+            color: #2980b9; /* Modrá pro emailový odkaz */
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+            .volunteer-content .volunteer-cta-email a:hover {
+                color: #1f618d; /* Tmavší modrá při najetí */
+            }
+
+/* Skrytí defaultní šipky (markeru) pro details */
+.volunteer-option summary::-webkit-details-marker {
+    display: none;
+}
+
+.volunteer-option summary {
+    list-style-type: none; /* Pro Firefox a další */
+}
+
+
+/* Responzivita pro novou sekci */
+@media (max-width: 768px) {
+    .section-volunteer-opportunities h2.centered-text {
+        font-size: 1.8em;
+    }
+
+    .section-volunteer-opportunities p.centered-text.intro-paragraph {
+        font-size: 1em;
+        margin-bottom: 2em;
+    }
+
+    .volunteer-option summary {
+        font-size: 1.2em;
+        padding: 15px 20px;
+    }
+
+    .volunteer-content {
+        padding: 15px 20px 20px 20px;
+    }
+
+        .volunteer-content h3 {
+            font-size: 1.15em;
+        }
+
+        .volunteer-content h4 {
+            font-size: 1.05em;
+        }
+}
+/* === End New Volunteer Opportunities Section Styles === */
+
+
 /* === Internship Call to Action Styles === */
 .section-internship-cta {
     background-color: #e0f2fe; /* Světle modrá - nebo jiná výrazná, ale ladící barva */
