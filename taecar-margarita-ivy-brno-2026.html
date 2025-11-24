@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TAECAR Presentation</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000000;
+            color: #ffffff;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 80px;
+            box-sizing: border-box;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out;
+            pointer-events: none; /* Kliknutí propadnou na body */
+            z-index: 0;
+        }
+
+        .slide.active {
+            opacity: 1;
+            z-index: 1;
+            pointer-events: auto;
+        }
+
+        h1 {
+            font-size: 5rem;
+            font-weight: 700;
+            letter-spacing: -2px;
+            margin-bottom: 20px;
+            line-height: 1;
+            text-transform: uppercase;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: #b0b0b0;
+            margin-bottom: 40px;
+            max-width: 80%;
+        }
+
+        p {
+            font-size: 1.8rem;
+            line-height: 1.4;
+            max-width: 70%;
+            font-weight: 400;
+        }
+
+        .highlight {
+            color: #ffffff;
+            font-weight: 700;
+            border-bottom: 2px solid #fff;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 40px;
+            left: 80px;
+            font-size: 0.9rem;
+            color: #555;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Progress bar */
+        .progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 5px;
+            background-color: #333;
+            width: 100%;
+        }
+        .progress-bar {
+            height: 100%;
+            background-color: #fff;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SLIDE 1 -->
+    <div class="slide active">
+        <h1>TAECAR</h1>
+        <h2>Transcendence Archive | European Conceptual Art Repository</h2>
+        <div class="footer">A VIRTÙ RESEARCH & TECHNOLOGIES</div>
+    </div>
+
+    <!-- SLIDE 2 -->
+    <div class="slide">
+        <h1>VIZE</h1>
+        <p>Nehledáme pouze finální objekty.<br>
+        Archivujeme <span class="highlight">myšlenku</span>, proces a kontext.</p>
+        <div class="footer">Filozofie projektu</div>
+    </div>
+
+    <!-- SLIDE 3 -->
+    <div class="slide">
+        <h1>METODIKA</h1>
+        <h2>Konceptuální Dossier</h2>
+        <p>Geneze díla. Poznámky. Skici. Odpad. <br>
+        To vše tvoří hodnotu, kterou uchováváme pro budoucnost.</p>
+        <div class="footer">Archivace procesu</div>
+    </div>
+
+    <!-- SLIDE 4 -->
+    <div class="slide">
+        <h1>PROJEKT BRNO 2026</h1>
+        <p>12 měsíců. Veřejný urbánní prostor.<br>
+        Živá laboratoř konceptuálního umění.<br>
+        Prezentace děl mimo galerijní "white cube".</p>
+        <div class="footer">Realizace</div>
+    </div>
+
+    <!-- SLIDE 5 -->
+    <div class="slide">
+        <h1>MARGARITA IVY</h1>
+        <p>Hledáme radikalitu a téma mortality.<br>
+        Dílo s biologickým materiálem v epoxidu přesně odpovídá kurátorskému záměru <i>Jany Písaříkové</i>.</p>
+        <div class="footer">Kurátorský zájem</div>
+    </div>
+
+    <!-- SLIDE 6 -->
+    <div class="slide">
+        <h1>MODEL SPOLUPRÁCE</h1>
+        <h2>Dvě cesty</h2>
+        <p>1. <strong>Akvizice:</strong> Odkup díla a konceptu do sbírky TAECAR.<br>
+        2. <strong>Zápůjčka:</strong> Licencování pro výstavu a digitální archivaci.</p>
+        <div class="footer">Business model</div>
+    </div>
+
+    <!-- SLIDE 7 -->
+    <div class="slide">
+        <h1>SYNERGIE</h1>
+        <p>Umělec získává trvalý zápis v evropském kontextu.<br>
+        Galerie získává partnera pro technologicky náročné realizace.</p>
+        <div class="footer">Win-Win</div>
+    </div>
+
+    <!-- SLIDE 8 -->
+    <div class="slide">
+        <h1>KONTAKT</h1>
+        <p>Viktor Lošťák<br>
+        <span style="font-size: 1.2rem; color: #888;">Producent</span></p>
+        <p style="margin-top: 20px; font-size: 1.2rem;">avirtu.net | taecar.art</p>
+        <div class="footer">Děkuji za pozornost</div>
+    </div>
+
+    <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const progressBar = document.getElementById('progressBar');
+        const totalSlides = slides.length;
+        
+        // Proměnná pro cooldown scrollování
+        let isScrolling = false;
+
+        function updateProgress() {
+            const percentage = ((currentSlide + 1) / totalSlides) * 100;
+            progressBar.style.width = percentage + '%';
+        }
+
+        function showSlide(index) {
+            // Ošetření hranic
+            if (index >= totalSlides) index = 0; 
+            if (index < 0) index = 0;
+
+            // Skrytí všech
+            slides.forEach(slide => {
+                slide.classList.remove('active');
+            });
+
+            // Zobrazení aktuálního
+            slides[index].classList.add('active');
+            currentSlide = index;
+            updateProgress();
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                showSlide(currentSlide + 1);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                showSlide(currentSlide - 1);
+            }
+        }
+
+        // Klávesnice
+        document.addEventListener('keydown', (e) => {
+            // Šipka doprava, Mezerník, Enter, Tab -> Další
+            if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter' || e.key === 'Tab') {
+                // Zabráníme defaultnímu chování (např. posun stránky mezerníkem nebo focus tabem)
+                if (e.key === ' ' || e.key === 'Tab') {
+                    e.preventDefault();
+                }
+                nextSlide();
+            } 
+            // Šipka doleva -> Předchozí
+            else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        // Scrolling (Kolečko myši / Touchpad)
+        document.addEventListener('wheel', (e) => {
+            if (isScrolling) return; // Pokud běží cooldown, ignorujeme událost
+
+            // Detekce směru
+            if (e.deltaY > 0) {
+                nextSlide();
+                activateScrollCooldown();
+            } else if (e.deltaY < 0) {
+                prevSlide();
+                activateScrollCooldown();
+            }
+        });
+
+        function activateScrollCooldown() {
+            isScrolling = true;
+            // 800ms pauza, aby jeden scroll nepřeskočil 5 slajdů
+            setTimeout(() => {
+                isScrolling = false;
+            }, 800);
+        }
+
+        // Kliknutí myší (kdekoliv)
+        document.addEventListener('click', (e) => {
+            // Pokud klikneš do levé třetiny obrazovky, jde to zpět, jinak dopředu
+            if (e.clientX < window.innerWidth / 3) {
+                prevSlide();
+            } else {
+                nextSlide();
+            }
+        });
+
+        // Init
+        updateProgress();
+
+    </script>
+</body>
+</html>
