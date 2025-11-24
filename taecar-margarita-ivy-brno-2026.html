@@ -2,7 +2,7 @@
 <html lang="cs">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>TAECAR Presentation</title>
     <style>
         body, html {
@@ -10,10 +10,15 @@
             padding: 0;
             width: 100%;
             height: 100%;
+            /* Podpora pro mobilní prohlížeče s dynamickou lištou */
+            height: 100dvh; 
             background-color: #000000;
             color: #ffffff;
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             overflow: hidden;
+            /* Zákaz výběru textu pro lepší UX na mobilu */
+            user-select: none;
+            -webkit-user-select: none;
         }
 
         .slide {
@@ -26,11 +31,12 @@
             flex-direction: column;
             justify-content: center;
             align-items: flex-start;
-            padding: 80px;
+            /* Responzivní padding: méně na mobilu, více na PC */
+            padding: clamp(30px, 8vw, 80px); 
             box-sizing: border-box;
             opacity: 0;
             transition: opacity 0.6s ease-in-out;
-            pointer-events: none; /* Kliknutí propadnou na body */
+            pointer-events: none;
             z-index: 0;
         }
 
@@ -41,27 +47,34 @@
         }
 
         h1 {
-            font-size: 5rem;
+            /* Responzivní font: min 2.5rem, max 5rem, škáluje se */
+            font-size: clamp(2.5rem, 8vw, 5rem);
             font-weight: 700;
-            letter-spacing: -2px;
+            letter-spacing: -0.04em;
             margin-bottom: 20px;
             line-height: 1;
             text-transform: uppercase;
         }
 
         h2 {
-            font-size: 2.5rem;
+            font-size: clamp(1.2rem, 4vw, 2.5rem);
             font-weight: 300;
             color: #b0b0b0;
-            margin-bottom: 40px;
-            max-width: 80%;
+            margin-bottom: clamp(20px, 5vw, 40px);
+            max-width: 90%;
         }
 
         p {
-            font-size: 1.8rem;
-            line-height: 1.4;
-            max-width: 70%;
+            font-size: clamp(1rem, 3vw, 1.8rem);
+            line-height: 1.5;
+            max-width: 90%; /* Na mobilu širší */
             font-weight: 400;
+        }
+
+        /* Na velkých obrazovkách omezíme šířku textu pro čitelnost */
+        @media (min-width: 1024px) {
+            p { max-width: 70%; }
+            h2 { max-width: 80%; }
         }
 
         .highlight {
@@ -72,15 +85,15 @@
 
         .footer {
             position: absolute;
-            bottom: 40px;
-            left: 80px;
-            font-size: 0.9rem;
+            /* Responzivní pozice od spodu a zleva */
+            bottom: clamp(20px, 5vw, 40px);
+            left: clamp(30px, 8vw, 80px);
+            font-size: clamp(0.7rem, 1.5vw, 0.9rem);
             color: #555;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
-        /* Progress bar */
         .progress {
             position: absolute;
             bottom: 0;
@@ -88,6 +101,7 @@
             height: 5px;
             background-color: #333;
             width: 100%;
+            z-index: 10;
         }
         .progress-bar {
             height: 100%;
@@ -161,8 +175,8 @@
     <div class="slide">
         <h1>KONTAKT</h1>
         <p>Viktor Lošťák<br>
-        <span style="font-size: 1.2rem; color: #888;">Producent</span></p>
-        <p style="margin-top: 20px; font-size: 1.2rem;">avirtu.net | taecar.art</p>
+        <span style="font-size: 1.1em; color: #888;">Producent</span></p>
+        <p style="margin-top: 20px;">avirtu.net | taecar.art</p>
         <div class="footer">Děkuji za pozornost</div>
     </div>
 
@@ -175,9 +189,11 @@
         const slides = document.querySelectorAll('.slide');
         const progressBar = document.getElementById('progressBar');
         const totalSlides = slides.length;
-        
-        // Proměnná pro cooldown scrollování
         let isScrolling = false;
+
+        // Proměnné pro touch (swipe)
+        let touchStartX = 0;
+        let touchEndX = 0;
 
         function updateProgress() {
             const percentage = ((currentSlide + 1) / totalSlides) * 100;
@@ -185,16 +201,13 @@
         }
 
         function showSlide(index) {
-            // Ošetření hranic
             if (index >= totalSlides) index = 0; 
             if (index < 0) index = 0;
 
-            // Skrytí všech
             slides.forEach(slide => {
                 slide.classList.remove('active');
             });
 
-            // Zobrazení aktuálního
             slides[index].classList.add('active');
             currentSlide = index;
             updateProgress();
@@ -212,27 +225,21 @@
             }
         }
 
-        // Klávesnice
+        // --- OVLÁDÁNÍ KLÁVESNICÍ ---
         document.addEventListener('keydown', (e) => {
-            // Šipka doprava, Mezerník, Enter, Tab -> Další
             if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter' || e.key === 'Tab') {
-                // Zabráníme defaultnímu chování (např. posun stránky mezerníkem nebo focus tabem)
                 if (e.key === ' ' || e.key === 'Tab') {
                     e.preventDefault();
                 }
                 nextSlide();
-            } 
-            // Šipka doleva -> Předchozí
-            else if (e.key === 'ArrowLeft') {
+            } else if (e.key === 'ArrowLeft') {
                 prevSlide();
             }
         });
 
-        // Scrolling (Kolečko myši / Touchpad)
+        // --- OVLÁDÁNÍ KOLEČKEM / TOUCHPADEM ---
         document.addEventListener('wheel', (e) => {
-            if (isScrolling) return; // Pokud běží cooldown, ignorujeme událost
-
-            // Detekce směru
+            if (isScrolling) return; 
             if (e.deltaY > 0) {
                 nextSlide();
                 activateScrollCooldown();
@@ -244,15 +251,38 @@
 
         function activateScrollCooldown() {
             isScrolling = true;
-            // 800ms pauza, aby jeden scroll nepřeskočil 5 slajdů
-            setTimeout(() => {
-                isScrolling = false;
-            }, 800);
+            setTimeout(() => { isScrolling = false; }, 800);
         }
 
-        // Kliknutí myší (kdekoliv)
+        // --- OVLÁDÁNÍ DOTYKEM (SWIPE) ---
+        document.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, {passive: true});
+
+        document.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, {passive: true});
+
+        function handleSwipe() {
+            // Minimální vzdálenost pro swipe (aby se nebraly v potaz nechtěné dotyky)
+            const threshold = 50; 
+            
+            if (touchEndX < touchStartX - threshold) {
+                // Swipe doleva -> Další
+                nextSlide();
+            }
+            if (touchEndX > touchStartX + threshold) {
+                // Swipe doprava -> Předchozí
+                prevSlide();
+            }
+        }
+
+        // --- OVLÁDÁNÍ KLIKNUTÍM (FALLBACK) ---
         document.addEventListener('click', (e) => {
-            // Pokud klikneš do levé třetiny obrazovky, jde to zpět, jinak dopředu
+            // Ignorujeme kliknutí, pokud bylo vyhodnoceno jako swipe (malá ochrana)
+            if (Math.abs(touchEndX - touchStartX) > 10) return;
+
             if (e.clientX < window.innerWidth / 3) {
                 prevSlide();
             } else {
@@ -262,6 +292,12 @@
 
         // Init
         updateProgress();
+
+        // Fix pro mobilní výšku při resize (změna orientace)
+        window.addEventListener('resize', () => {
+            let vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+        });
 
     </script>
 </body>
